@@ -9,7 +9,7 @@ import org.bank.entity.enums.EmployeePosition;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Employee {
+public class Employee extends User{
 
     String username;
     String password;

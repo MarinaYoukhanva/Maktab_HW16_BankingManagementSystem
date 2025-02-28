@@ -8,10 +8,12 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Customer {
+public class Customer extends User {
 
     String firstName;
     String lastName;
+    String username;
+    String password;
     String customerCode;
     String nationalCode;
 }

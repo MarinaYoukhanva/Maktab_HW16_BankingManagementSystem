@@ -1,6 +1,6 @@
 package org.bank.exceptions;
 
-import org.example.base.model.BaseEntity;
+import org.bank.base.model.BaseEntity;
 
 public class NotFoundException extends RuntimeException {
 

@@ -2,6 +2,10 @@ package org.bank.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.bank.entity.enums.AccountType;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -10,6 +14,9 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Account {
 
-    String username;
-    String password;
+    String accountNumber;
+    String accountSheba;
+    AccountType accountType;
+    Long balance;
+    LocalDate createdAt;
 }

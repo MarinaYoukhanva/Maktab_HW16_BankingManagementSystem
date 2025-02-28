@@ -7,7 +7,7 @@ import org.bank.base.config.SessionFactoryInstance;
 import org.bank.base.model.BaseEntity;
 import org.bank.base.repository.BaseRepository;
 import org.bank.exceptions.NotFoundException;
-import org.bank.validations.HibernateValidation;
+import org.bank.validations.HibernateValidator;
 import org.hibernate.Session;
 
 import java.io.Serializable;
@@ -20,7 +20,7 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
         R extends BaseRepository<ID, T>> implements BaseService<ID, T> {
 
     private final R repository;
-    HibernateValidation<ID, T> validation = new HibernateValidation<>();
+    HibernateValidator<ID, T> validation = new HibernateValidator<>();
 
     public BaseServiceImpl(R repository) {
         this.repository = repository;
