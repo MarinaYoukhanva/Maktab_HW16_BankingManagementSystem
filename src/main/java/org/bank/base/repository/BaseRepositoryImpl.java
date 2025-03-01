@@ -1,5 +1,6 @@
 package org.bank.base.repository;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import lombok.RequiredArgsConstructor;
 import org.bank.base.model.BaseEntity;
 import org.hibernate.Session;
@@ -40,4 +41,25 @@ public abstract class BaseRepositoryImpl<ID extends Serializable, T extends Base
                 .executeUpdate();
     }
 
+    @Override
+    public Long fieldIdCounter(Session session, Class<?> entityClass, SingularAttribute<?, ?> field, Object value) {
+        String query = "SELECT COUNT(id) FROM "
+                + entityClass.getSimpleName() +
+                " WHERE " + field.getName() + " = :value";
+        return session
+                .createQuery(query, Long.class)
+                .setParameter("value", value)
+                .getSingleResult();
+    }
+//    @Override
+//    public Long fieldIdCounter(Session session, Class<?> entityClass, SingularAttribute<?, ?> field, Object value) {
+//        CriteriaBuilder builder = session.getCriteriaBuilder();
+//        CriteriaQuery<Long> query = builder.createQuery(Long.class);
+//        Root<?> root = query.from(entityClass);
+//
+//        query.select(builder.count(root.get("id")))
+//                .where(builder.equal(root.get(field.getName()), value));
+//
+//        return session.createQuery(query).getSingleResult();
+//    }
 }

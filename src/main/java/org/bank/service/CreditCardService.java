@@ -1,4 +1,7 @@
 package org.bank.service;
 
-public interface CreditCardService {
+import org.bank.base.service.BaseService;
+import org.bank.entity.CreditCard;
+
+public interface CreditCardService extends BaseService<Long, CreditCard> {
 }

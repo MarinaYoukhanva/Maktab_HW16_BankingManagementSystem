@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class HibernateValidator<ID extends Serializable,T extends BaseEntity<ID>> {
 
-    public Set<ConstraintViolation<T>> checkValidations(T entity) {
+    public Set<ConstraintViolation<T>> validate(T entity) {
         try (ValidatorFactory factory = jakarta.validation.Validation.byDefaultProvider()
                 .configure()
                 .messageInterpolator(new ParameterMessageInterpolator())

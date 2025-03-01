@@ -1,7 +1,9 @@
 package org.bank.entity;
 
+import jakarta.persistence.Entity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.bank.base.model.BaseEntity;
 
 import java.time.LocalDate;
 
@@ -10,7 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreditCard {
+@Entity
+public class CreditCard extends BaseEntity<Long> {
 
     String cardNumber;
     String cvv2;

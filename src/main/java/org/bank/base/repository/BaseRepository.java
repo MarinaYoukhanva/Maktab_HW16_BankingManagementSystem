@@ -1,5 +1,6 @@
 package org.bank.base.repository;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import org.bank.base.model.BaseEntity;
 import org.hibernate.Session;
 
@@ -13,5 +14,6 @@ public interface BaseRepository <ID extends Serializable,T extends BaseEntity<ID
      List<T> findAll(Session session);
      Optional<T> findById(Session session, ID id);
      int delete(Session session, ID id);
+     Long fieldIdCounter(Session session, Class<?> entityClass, SingularAttribute<?, ?> field, Object value);
 
 }

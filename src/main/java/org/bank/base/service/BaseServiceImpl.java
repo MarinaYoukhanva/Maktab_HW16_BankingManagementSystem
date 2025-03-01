@@ -8,7 +8,7 @@ import org.bank.base.model.BaseEntity;
 import org.bank.base.repository.BaseRepository;
 import org.bank.exceptions.NotFoundException;
 import org.bank.validations.HibernateValidator;
-import org.hibernate.Session;
+import org.bank.validations.UniqueFieldCheckable;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,7 +20,7 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
         R extends BaseRepository<ID, T>> implements BaseService<ID, T> {
 
     private final R repository;
-    HibernateValidator<ID, T> validation = new HibernateValidator<>();
+    HibernateValidator<ID, T> hibernateValidator = new HibernateValidator<>();
 
     public BaseServiceImpl(R repository) {
         this.repository = repository;
@@ -29,11 +29,14 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
 
     @Override
     public T save(T entity) {
-        Set<ConstraintViolation<T>> violations = validation.checkValidations(entity);
+        Set<ConstraintViolation<T>> violations = hibernateValidator.validate(entity);
         if (!violations.isEmpty())
             throw new ValidationException(String.valueOf(violations));
         try (var session = SessionFactoryInstance.sessionFactory.openSession()) {
-            infoLogicCheck(session, entity);
+
+            if (this instanceof UniqueFieldCheckable)
+                ((UniqueFieldCheckable<T>) this).checkUniqueFields(session, entity);
+
             try {
                 session.beginTransaction();
                 repository.save(session, entity);
@@ -62,11 +65,13 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
 
     @Override
     public T update(T entity) {
-        Set<ConstraintViolation<T>> violations = validation.checkValidations(entity);
+        Set<ConstraintViolation<T>> violations = hibernateValidator.validate(entity);
         if (!violations.isEmpty())
             throw new ValidationException(String.valueOf(violations));
         try (var session = SessionFactoryInstance.sessionFactory.openSession()) {
-            infoLogicCheck(session, entity);
+
+            if (this instanceof UniqueFieldCheckable)
+                ((UniqueFieldCheckable<T>) this).checkUniqueFields(session, entity);
             try {
                 session.beginTransaction();
                 var foundEntity = repository.findById(session, entity.getId())
@@ -129,8 +134,6 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
     }
 
     public abstract void updateColumns(T entity, T foundEntity);
-
-    public abstract void infoLogicCheck(Session session, T entity);
 
 }
 
