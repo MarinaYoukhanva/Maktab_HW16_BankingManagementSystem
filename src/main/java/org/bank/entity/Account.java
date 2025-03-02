@@ -2,6 +2,7 @@ package org.bank.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.bank.base.model.BaseEntity;
 import org.bank.entity.enums.AccountType;
 
 import java.time.LocalDate;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Account {
+public class Account extends BaseEntity<Long> {
 
     String accountNumber;
     String accountSheba;

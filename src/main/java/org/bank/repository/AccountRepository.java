@@ -1,4 +1,7 @@
 package org.bank.repository;
 
-public interface AccountRepository {
+import org.bank.base.repository.BaseRepository;
+import org.bank.entity.Account;
+
+public interface AccountRepository extends BaseRepository<Long, Account> {
 }

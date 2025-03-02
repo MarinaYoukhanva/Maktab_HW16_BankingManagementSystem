@@ -49,19 +49,6 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
         }
     }
 
-//    @Override
-//    public T save(T entity) {
-//        Set<ConstraintViolation<T>> violations = validation.checkValidations(entity);
-//        if (!violations.isEmpty()) {
-//            throw new ValidationException(String.valueOf(violations));
-//        }
-//        return sessionManager.executeWithinTransaction(session -> {
-//            infoLogicCheck(session, entity);
-//            repository.save(session, entity);
-//            return entity;
-//        });
-//    }
-
 
     @Override
     public T update(T entity) {
@@ -90,30 +77,14 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
     @Override
     public List<T> findAll() {
         try (var session = SessionFactoryInstance.sessionFactory.openSession()) {
-            try {
-                session.beginTransaction();
-                var result = repository.findAll(session);
-                session.getTransaction().commit();
-                return result;
-            } catch (Exception e) {
-                session.getTransaction().rollback();
-                throw e;
-            }
+            return repository.findAll(session);
         }
     }
 
     @Override
     public Optional<T> findById(ID id) {
         try (var session = SessionFactoryInstance.sessionFactory.openSession()) {
-            try {
-                session.beginTransaction();
-                var result = repository.findById(session, id);
-                session.getTransaction().commit();
-                return result;
-            } catch (Exception e) {
-                session.getTransaction().rollback();
-                throw e;
-            }
+            return repository.findById(session, id);
         }
     }
 
@@ -132,8 +103,5 @@ public abstract class BaseServiceImpl<ID extends Serializable, T extends BaseEnt
             }
         }
     }
-
-    public abstract void updateColumns(T entity, T foundEntity);
-
 }
 

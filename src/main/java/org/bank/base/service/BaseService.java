@@ -13,6 +13,7 @@ public interface BaseService <ID extends Serializable,T extends BaseEntity<ID>> 
     List<T> findAll();
     Optional<T> findById(ID id);
     void delete(ID id);
+    void updateColumns(T entity, T foundEntity);
 
 
 }
