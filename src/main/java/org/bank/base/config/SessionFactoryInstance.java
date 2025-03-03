@@ -14,6 +14,9 @@ public class SessionFactoryInstance {
                 .addAnnotatedClass(CreditCard.class)
                 .addAnnotatedClass(Customer.class)
                 .addAnnotatedClass(Employee.class)
+                .addAnnotatedClass(Account.class)
+                .addAnnotatedClass(BankBranch.class)
+                .addAnnotatedClass(Transaction.class)
                 .buildSessionFactory();
     }
 

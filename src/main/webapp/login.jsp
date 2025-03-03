@@ -11,7 +11,12 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/customer/login" method="post">
+<form action="/login" method="post">
+    <label for="userType">Login as:</label>
+    <select name="userType" id="userType">
+        <option value="customer">Customer</option>
+        <option value="employee">Employee</option>
+    </select>
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" placeholder="Enter username"/>
 
@@ -21,11 +26,13 @@
     <button type="submit">Submit</button>
 
     <% if (request.getAttribute("message") != null) { %>
-    <p style="color:green;"><%= request.getAttribute("message") %></p>
+    <p style="color:green;"><%= request.getAttribute("message") %>
+    </p>
     <% } %>
 
     <% if (request.getAttribute("error") != null) { %>
-    <p style="color:red;"><%= request.getAttribute("error") %></p>
+    <p style="color:red;"><%= request.getAttribute("error") %>
+    </p>
     <% } %>
 </form>
 </body>

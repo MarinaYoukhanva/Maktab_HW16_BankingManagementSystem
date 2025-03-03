@@ -3,10 +3,10 @@ package org.bank;
 import org.bank.base.config.ApplicationContext;
 import org.bank.base.config.SessionFactoryInstance;
 import org.bank.entity.CreditCard;
-import org.bank.entity.CreditCard_;
 import org.bank.entity.Customer;
 import org.bank.repository.CreditCardRepository;
 import org.bank.service.CreditCardService;
+import org.bank.service.CustomerService;
 import org.hibernate.Session;
 
 import java.time.LocalDate;
@@ -16,18 +16,27 @@ public class Main {
         CreditCardService creditCardService = ApplicationContext.getCreditCardService();
         CreditCardRepository creditCardRepository = ApplicationContext.getCreditCardRepository();
 
-        ApplicationContext.getCustomerService();
+        CustomerService customerService = ApplicationContext.getCustomerService();
         ApplicationContext.getEmployeeService();
 
-        try(Session session = SessionFactoryInstance.sessionFactory.openSession()){
-
-            try {
-                creditCardService.save(new CreditCard("12345678", "666",
-                        LocalDate.of(2024,1,12),
-                        "5511", "2222"));
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
+//        customerService.findAll().forEach(System.out::println);
+//        Customer customer = customerService.findById(1L).get();
+//
+//        try(Session session = SessionFactoryInstance.sessionFactory.openSession()){
+//            Customer customer = ApplicationContext.getCustomerRepository()
+//                    .customerWithAccounts(session,"111");
+//            System.out.println(customer);
+//            System.out.println("--------------------------");
+//            ApplicationContext.getAccountRepository().customerAccounts(session,"111")
+//                    .forEach(System.out::println);
+//
+//            try {
+//                creditCardService.save(new CreditCard("12345678", "666",
+//                        LocalDate.of(2024,1,12),
+//                        "5511", "2222", null));
+//            }catch (Exception e){
+//                System.out.println(e.getMessage());
+//            }
 
 //            Long count = creditCardRepository.fieldIdCounter(
 //                    session,
@@ -36,6 +45,6 @@ public class Main {
 //                    "1111"
 //            );
 //            System.out.println(count);
-        }
+//        }
     }
 }

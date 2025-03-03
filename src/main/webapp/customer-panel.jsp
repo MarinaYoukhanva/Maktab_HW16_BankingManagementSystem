@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/customer/login">login</a>
+<%--<a href="/login?userType=customer">login</a>--%>
 </body>
 </html>

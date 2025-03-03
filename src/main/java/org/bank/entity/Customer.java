@@ -1,9 +1,13 @@
 package org.bank.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.bank.base.model.BaseEntity;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -19,6 +23,11 @@ public class Customer extends BaseEntity<Long> {
     String password;
     String customerCode;
     String nationalCode;
+    String phoneNumber;
+
+
+    @OneToMany(mappedBy = "owner")
+    List<Account> accounts;
 
     @Override
     public String toString() {
@@ -30,6 +39,7 @@ public class Customer extends BaseEntity<Long> {
                 ", password='" + password + '\'' +
                 ", customerCode='" + customerCode + '\'' +
                 ", nationalCode='" + nationalCode + '\'' +
+                ", accounts=" + accounts +
                 '}';
     }
 }

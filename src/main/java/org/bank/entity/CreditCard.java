@@ -1,6 +1,7 @@
 package org.bank.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToOne;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.bank.base.model.BaseEntity;
@@ -20,4 +21,20 @@ public class CreditCard extends BaseEntity<Long> {
     LocalDate expiryDate;
     String firstPass;
     String secondPass;
+
+    @OneToOne(optional = false)
+    Account account;
+
+    @Override
+    public String toString() {
+        return "CreditCard{" +
+                "id" + getId() +
+                "cardNumber='" + cardNumber + '\'' +
+                ", cvv2='" + cvv2 + '\'' +
+                ", expiryDate=" + expiryDate +
+                ", firstPass='" + firstPass + '\'' +
+                ", secondPass='" + secondPass + '\'' +
+                ", account=" + account.getId() +
+                '}';
+    }
 }

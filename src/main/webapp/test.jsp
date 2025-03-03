@@ -14,9 +14,21 @@
 </head>
 <body>
 <% if (request.getAttribute("message") != null) { %>
-<p style="color:green;"><%= request.getAttribute("message") %></p>
+<p style="color:green;"><%= request.getAttribute("message") %>
+</p>
 <% } %>
 
-<h3>customer: ${customer}</h3>
+<% if (request.getAttribute("customer") != null){ %>
+      <h3>
+          customer:<%= request.getAttribute("customer") %>
+      </h3>
+<% } %>
+
+<% if (request.getAttribute("employee") != null){ %>
+<h3>
+    employee:<%= request.getAttribute("employee") %>
+</h3>
+<% } %>
+
 </body>
 </html>

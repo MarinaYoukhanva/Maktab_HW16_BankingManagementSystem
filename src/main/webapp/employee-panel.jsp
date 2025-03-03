@@ -11,7 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-<a href="employee-login.jsp">login</a>
-
+<%--<a href="/login?userType=employee">Login</a>--%>
 </body>
 </html>

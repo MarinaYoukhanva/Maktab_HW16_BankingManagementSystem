@@ -20,4 +20,16 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Long, Customer>
                 .setParameter("username", username)
                 .uniqueResultOptional();
     }
+
+    @Override
+    public Customer customerWithAccounts(Session session, String customerCode){
+        String hql = """
+                SELECT c FROM Customer c
+                LEFT JOIN FETCH c.accounts
+                WHERE c.customerCode = :customerCode
+                """;
+        return session.createQuery(hql, Customer.class)
+                .setParameter("customerCode", customerCode)
+                .uniqueResult();
+    }
 }
