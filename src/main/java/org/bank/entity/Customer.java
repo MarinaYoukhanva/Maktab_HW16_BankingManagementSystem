@@ -19,4 +19,17 @@ public class Customer extends BaseEntity<Long> {
     String password;
     String customerCode;
     String nationalCode;
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id" + getId() +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", customerCode='" + customerCode + '\'' +
+                ", nationalCode='" + nationalCode + '\'' +
+                '}';
+    }
 }

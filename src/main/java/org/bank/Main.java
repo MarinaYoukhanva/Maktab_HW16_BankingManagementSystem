@@ -16,6 +16,9 @@ public class Main {
         CreditCardService creditCardService = ApplicationContext.getCreditCardService();
         CreditCardRepository creditCardRepository = ApplicationContext.getCreditCardRepository();
 
+        ApplicationContext.getCustomerService();
+        ApplicationContext.getEmployeeService();
+
         try(Session session = SessionFactoryInstance.sessionFactory.openSession()){
 
             try {
