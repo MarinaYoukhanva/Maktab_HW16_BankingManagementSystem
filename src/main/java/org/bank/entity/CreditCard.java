@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import org.bank.base.model.BaseEntity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Setter
 @Getter
@@ -18,7 +19,7 @@ public class CreditCard extends BaseEntity<Long> {
 
     String cardNumber;
     String cvv2;
-    LocalDate expiryDate;
+    LocalDateTime expiryDate;
     String firstPass;
     String secondPass;
 

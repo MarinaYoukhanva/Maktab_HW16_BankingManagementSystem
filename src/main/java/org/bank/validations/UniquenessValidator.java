@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class UniquenessValidator {
 
-    public static <ID extends Serializable, T extends BaseEntity<ID>> void checkUniqueField(
+    public static <ID extends Serializable, T extends BaseEntity<ID>> void checkUniqueFieldOrThrowException(
             BaseRepository<ID, T> repository, Session session,
             Class<?> entityClass, SingularAttribute<?, ?> field, Object value) {
         Long fieldCount = repository.fieldIdCounter(session,entityClass, field, value);

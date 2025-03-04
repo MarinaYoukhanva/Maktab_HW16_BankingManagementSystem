@@ -5,7 +5,7 @@ import org.bank.base.service.BaseServiceImpl;
 import org.bank.entity.Employee;
 import org.bank.exceptions.NotFoundException;
 import org.bank.repository.EmployeeRepository;
-import org.bank.service.Authentication.EmployeeAuthentication;
+import org.bank.service.authentication.EmployeeAuthentication;
 import org.bank.service.EmployeeService;
 import org.hibernate.Session;
 

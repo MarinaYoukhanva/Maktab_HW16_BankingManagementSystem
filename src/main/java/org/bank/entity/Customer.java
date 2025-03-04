@@ -25,9 +25,11 @@ public class Customer extends BaseEntity<Long> {
     String nationalCode;
     String phoneNumber;
 
-
     @OneToMany(mappedBy = "owner")
     List<Account> accounts;
+
+    public record CustomerDto(String firstName, String lastName,
+                              String nationalCode, String phoneNumber) {}
 
     @Override
     public String toString() {

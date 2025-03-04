@@ -24,6 +24,10 @@ public class ApplicationContext {
     private static final AccountRepository ACCOUNT_REPOSITORY;
     private static final AccountService ACCOUNT_SERVICE;
 
+    private static final Class<BankBranch> bankBranchClass;
+    private static final BankBranchRepository BANK_BRANCH_REPOSITORY;
+    private static final BankBranchService BANK_BRANCH_SERVICE;
+
     static {
         creditCardClass = CreditCard.class;
         CREDIT_CARD_REPOSITORY = new CreditCardRepositoryImpl(creditCardClass);
@@ -40,6 +44,10 @@ public class ApplicationContext {
         accountClass = Account.class;
         ACCOUNT_REPOSITORY = new AccountRepositoryImpl(accountClass);
         ACCOUNT_SERVICE = new AccountServiceImpl(ACCOUNT_REPOSITORY);
+
+        bankBranchClass = BankBranch.class;
+        BANK_BRANCH_REPOSITORY = new BankBranchRepositoryImpl(bankBranchClass);
+        BANK_BRANCH_SERVICE = new BankBranchServiceImpl(BANK_BRANCH_REPOSITORY);
     }
     public static CreditCardService getCreditCardService() {return CREDIT_CARD_SERVICE; }
     public static CreditCardRepository getCreditCardRepository() {return CREDIT_CARD_REPOSITORY; }
@@ -52,4 +60,7 @@ public class ApplicationContext {
 
     public static AccountService getAccountService() {return ACCOUNT_SERVICE; }
     public static AccountRepository getAccountRepository() {return ACCOUNT_REPOSITORY; }
+
+    public static BankBranchService getBankBranchService() {return BANK_BRANCH_SERVICE; }
+    public static BankBranchRepository getBankBranchRepository() {return BANK_BRANCH_REPOSITORY;}
 }

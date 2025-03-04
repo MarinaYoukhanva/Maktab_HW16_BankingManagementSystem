@@ -1,4 +1,4 @@
-package org.bank.service.Authentication;
+package org.bank.service.authentication;
 
 import lombok.Getter;
 import lombok.Setter;
