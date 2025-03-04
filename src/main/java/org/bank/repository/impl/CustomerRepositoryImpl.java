@@ -22,7 +22,7 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Long, Customer>
     }
 
     @Override
-    public Customer customerWithAccounts(Session session, String customerCode){
+    public Customer customerWithAccounts(Session session, String customerCode) {
         String hql = """
                 SELECT c FROM Customer c
                 LEFT JOIN FETCH c.accounts
@@ -31,5 +31,13 @@ public class CustomerRepositoryImpl extends BaseRepositoryImpl<Long, Customer>
         return session.createQuery(hql, Customer.class)
                 .setParameter("customerCode", customerCode)
                 .uniqueResult();
+    }
+
+    @Override
+    public Optional<Customer> findByNationalCode(Session session, String nationalCode) {
+        return session.createQuery("FROM Customer c WHERE c.nationalCode = :nationalCode"
+                , Customer.class)
+                .setParameter("nationalCode", nationalCode)
+                .uniqueResultOptional();
     }
 }

@@ -7,6 +7,7 @@ import org.bank.entity.Account;
 import org.bank.entity.BankBranch;
 import org.bank.entity.CreditCard;
 import org.bank.entity.Customer;
+import org.bank.entity.dto.CreatedAccountInfoDto;
 import org.bank.exceptions.NotFoundException;
 import org.bank.repository.AccountRepository;
 import org.bank.service.AccountService;
@@ -43,16 +44,21 @@ public class AccountServiceImpl extends BaseServiceImpl<Long, Account, AccountRe
     }
 
     @Override
-    public void createBankAccount(
+    public CreatedAccountInfoDto createBankAccount(
             Customer.CustomerDto customerDto,
             Account.AccountDto accountDto) {
-        try (Session session = SessionFactoryInstance.sessionFactory.openSession()){
-            try{
+        try (Session session = SessionFactoryInstance.sessionFactory.openSession()) {
+            try {
                 session.beginTransaction();
-                Customer customer = ApplicationContext.getCustomerService().create(session, customerDto);
+                Customer customer = ApplicationContext.getCustomerRepository()
+                        .findByNationalCode(
+                                session, customerDto.nationalCode()
+                        ).orElseGet(() -> ApplicationContext.getCustomerService()
+                                .create(session, customerDto));
                 Account account = create(session, accountDto);
                 CreditCard creditCard = ApplicationContext.getCreditCardService().create(session);
 
+                customer.getAccounts().add(account);
                 account.setOwner(customer);
 //            account.setCreditCard(creditCard);
                 creditCard.setAccount(account);
@@ -63,13 +69,20 @@ public class AccountServiceImpl extends BaseServiceImpl<Long, Account, AccountRe
                 ApplicationContext.getCreditCardService().multipleEntitySave(session, creditCard);
 
                 session.getTransaction().commit();
-
-            }catch (Exception e){
+                return new CreatedAccountInfoDto(
+                        customer.getId(), customer.getFirstName(), customer.getLastName(),
+                        customer.getUsername(), customer.getPassword(),
+                        customer.getCustomerCode(), customer.getNationalCode(),
+                        customer.getPhoneNumber(),
+                        account.getId(), account.getAccountNumber(), account.getAccountSheba(),
+                        account.getBalance(), account.getAccountType(), account.getCreatedAt(),
+                        creditCard.getId(), creditCard.getCardNumber(), creditCard.getCvv2(),
+                        creditCard.getExpiryDate(), creditCard.getFirstPass(), creditCard.getSecondPass()
+                );
+            } catch (Exception e) {
                 session.getTransaction().rollback();
-                System.out.println(e.getMessage());
+                throw e;
             }
-
-
         }
     }
 }

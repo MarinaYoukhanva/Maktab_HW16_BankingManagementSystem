@@ -41,8 +41,8 @@ public class LoginServlet extends HttpServlet {
                 Employee employee = ApplicationContext
                         .getEmployeeService().login(username, password);
                 req.setAttribute("employee", employee);
-                req.getRequestDispatcher("/test.jsp").forward(req, resp);
                 req.setAttribute("message", "logged in successfully");
+                req.getRequestDispatcher("/employee-panel.jsp").forward(req, resp);
 
             } else {
                 resp.setStatus(400);

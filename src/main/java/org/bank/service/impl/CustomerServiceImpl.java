@@ -3,6 +3,7 @@ package org.bank.service.impl;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.bank.base.config.SessionFactoryInstance;
 import org.bank.base.service.BaseServiceImpl;
+import org.bank.entity.Account;
 import org.bank.entity.Customer;
 import org.bank.exceptions.NotFoundException;
 import org.bank.repository.CustomerRepository;
@@ -10,6 +11,8 @@ import org.bank.service.authentication.CustomerAuthentication;
 import org.bank.service.CustomerService;
 import org.bank.service.fieldGenerator.RandomGenerator;
 import org.hibernate.Session;
+
+import java.util.ArrayList;
 
 public class CustomerServiceImpl extends BaseServiceImpl<Long, Customer, CustomerRepository>
 implements CustomerService {
@@ -45,6 +48,6 @@ implements CustomerService {
         String password = RandomGenerator.generateCustomerPassword(session);
         return new Customer(firstname, lastname,
                 customerCode, password,
-                customerCode, nationalCode, phoneNumber, null);
+                customerCode, nationalCode, phoneNumber, new ArrayList<>());
     }
 }

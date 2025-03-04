@@ -21,13 +21,14 @@ public class Main {
         String generatedString = RandomStringUtils.random(10,true,true);
         System.out.println(generatedString);
 
-
-//        ApplicationContext.getAccountService().createBankAccount(
-//                new Customer.CustomerDto("marina", "y", "111", "0937"),
-//                new Account.AccountDto(AccountType.JARI, 1L, 100L)
+//
+//        Customer customer = ApplicationContext.getAccountService().createBankAccount(
+//                new Customer.CustomerDto("mari", "u", "123", "0937"),
+//                new Account.AccountDto(AccountType.BOLAND_MODAT, 1L, 300L)
 //        );
 
-        System.out.println(ApplicationContext.getAccountService().findById(1L).get().getCreditCard());
+//        System.out.println(customer.getId());
+//        System.out.println(ApplicationContext.getAccountService().findById(1L).get().getCreditCard());
 
 //        CreditCardService creditCardService = ApplicationContext.getCreditCardService();
 //        CreditCardRepository creditCardRepository = ApplicationContext.getCreditCardRepository();
