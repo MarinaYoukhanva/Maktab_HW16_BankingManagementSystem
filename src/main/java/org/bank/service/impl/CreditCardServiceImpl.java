@@ -1,6 +1,5 @@
 package org.bank.service.impl;
 
-import org.bank.base.config.ApplicationContext;
 import org.bank.base.config.SessionFactoryInstance;
 import org.bank.base.service.BaseServiceImpl;
 import org.bank.entity.CreditCard;
@@ -29,13 +28,17 @@ public class CreditCardServiceImpl extends BaseServiceImpl<Long, CreditCard, Cre
 
     @Override
     public void updateColumns(CreditCard entity, CreditCard foundEntity) {
-
+        foundEntity.setCardNumber(entity.getCardNumber());
+        foundEntity.setCvv2(entity.getCvv2());
+        foundEntity.setExpiryDate(entity.getExpiryDate());
+        foundEntity.setFirstPass(entity.getFirstPass());
+        foundEntity.setSecondPass(entity.getSecondPass());
     }
 
     @Override
     public void checkUniqueFields(Session session, CreditCard entity) {
         UniquenessValidator.checkUniqueFieldOrThrowException(getRepository(),
-                session, CreditCard.class, CreditCard_.firstPass, entity.getFirstPass());
+                session, CreditCard.class, CreditCard_.cardNumber, entity.getCardNumber());
     }
 
     @Override

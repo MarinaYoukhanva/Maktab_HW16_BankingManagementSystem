@@ -1,28 +1,43 @@
 package org.bank.service.impl;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.bank.base.config.SessionFactoryInstance;
 import org.bank.base.service.BaseServiceImpl;
-import org.bank.entity.Account;
 import org.bank.entity.Customer;
+import org.bank.entity.Customer_;
 import org.bank.exceptions.NotFoundException;
 import org.bank.repository.CustomerRepository;
-import org.bank.service.authentication.CustomerAuthentication;
 import org.bank.service.CustomerService;
+import org.bank.service.authentication.CustomerAuthentication;
 import org.bank.service.fieldGenerator.RandomGenerator;
+import org.bank.validations.UniqueFieldCheckable;
+import org.bank.validations.UniquenessValidator;
 import org.hibernate.Session;
 
 import java.util.ArrayList;
 
 public class CustomerServiceImpl extends BaseServiceImpl<Long, Customer, CustomerRepository>
-implements CustomerService {
+implements CustomerService, UniqueFieldCheckable<Customer> {
     public CustomerServiceImpl(CustomerRepository repository) {
         super(repository);}
 
 
     @Override
     public void updateColumns(Customer entity, Customer foundEntity) {
+        foundEntity.setFirstName(entity.getFirstName());
+        foundEntity.setLastName(entity.getLastName());
+        foundEntity.setPhoneNumber(entity.getPhoneNumber());
+        foundEntity.setUsername(entity.getUsername());
+        foundEntity.setPassword(entity.getPassword());
+    }
 
+    @Override
+    public void checkUniqueFields(Session session, Customer entity) {
+        UniquenessValidator.checkUniqueFieldOrThrowException(getRepository(),
+                session, Customer.class, Customer_.customerCode, entity.getCustomerCode());
+        UniquenessValidator.checkUniqueFieldOrThrowException(getRepository(),
+                session, Customer.class, Customer_.username, entity.getUsername());
+        UniquenessValidator.checkUniqueFieldOrThrowException(getRepository(),
+                session, Customer.class, Customer_.nationalCode, entity.getNationalCode());
     }
 
     @Override
@@ -50,4 +65,6 @@ implements CustomerService {
                 customerCode, password,
                 customerCode, nationalCode, phoneNumber, new ArrayList<>());
     }
+
+
 }

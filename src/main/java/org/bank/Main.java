@@ -15,20 +15,20 @@ import org.bank.service.fieldGenerator.RandomGenerator;
 import org.hibernate.Session;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
 //        ApplicationContext.getCustomerService().findById(2L)
-        try {
-            ApplicationContext.getCreditCardService().cardToCard(2L,
-                "6219038135923286","6219832412541856",
-                5000L, "281139", "690", LocalDate.of(2030, 3, 4)
-        );
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-//
-//
+//        try {
+//            ApplicationContext.getCreditCardService().cardToCard(2L,
+//                "6219038135923286","6219832412541856",
+//                100L, "281139", "690", LocalDate.of(2030, 3, 4)
+//        );
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+
 //
 //        Customer customer = ApplicationContext.getAccountService().createBankAccount(
 //                new Customer.CustomerDto("mari", "u", "123", "0937"),
@@ -59,13 +59,14 @@ public class Main {
 //            ApplicationContext.getAccountRepository().customerAccounts(session,"111")
 //                    .forEach(System.out::println);
 //
-//            try {
-//                creditCardService.save(new CreditCard("12345678", "666",
-//                        LocalDate.of(2024,1,12),
-//                        "5511", "2222", null));
-//            }catch (Exception e){
-//                System.out.println(e.getMessage());
-//            }
+            try {
+                ApplicationContext.getCreditCardService().singleEntitySave(
+                        new CreditCard("12345678", "666",
+                                LocalDateTime.now(),
+                        "5511", "2222", null));
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
 
 //            Long count = creditCardRepository.fieldIdCounter(
 //                    session,
