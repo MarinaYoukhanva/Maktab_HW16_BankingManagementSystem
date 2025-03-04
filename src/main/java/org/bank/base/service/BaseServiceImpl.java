@@ -1,5 +1,6 @@
 package org.bank.base.service;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ValidationException;
 import lombok.Getter;
@@ -118,5 +119,13 @@ public void delete(ID id) {
         }
     }
 }
+
+@Override
+public Optional<T> findEntityByUniqueField(Class<T> entityClass,
+                                           SingularAttribute<?, ?> field, Object value){
+        try (var session = SessionFactoryInstance.sessionFactory.openSession()) {
+            return getRepository().findEntityByUniqueField(session, entityClass, field, value);
+        }
+    }
 }
 

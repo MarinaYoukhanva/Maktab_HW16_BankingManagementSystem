@@ -42,7 +42,8 @@ public abstract class BaseRepositoryImpl<ID extends Serializable, T extends Base
     }
 
     @Override
-    public Long fieldIdCounter(Session session, Class<?> entityClass, SingularAttribute<?, ?> field, Object value) {
+    public Long fieldIdCounter(Session session, Class<?> entityClass,
+                               SingularAttribute<?, ?> field, Object value) {
         String query = "SELECT COUNT(id) FROM "
                 + entityClass.getSimpleName() +
                 " WHERE " + field.getName() + " = :value";
@@ -53,7 +54,8 @@ public abstract class BaseRepositoryImpl<ID extends Serializable, T extends Base
     }
 
     @Override
-    public Optional<T> findEntityByUniqueField(Session session, Class<T> entityClass, SingularAttribute<?, ?> field, Object value){
+    public Optional<T> findEntityByUniqueField(Session session, Class<T> entityClass,
+                                               SingularAttribute<?, ?> field, Object value){
         String query = "FROM " + entityClass.getSimpleName()
                 + " e WHERE e." + field.getName() + " = :value";
         return session.createQuery(query, entityClass)

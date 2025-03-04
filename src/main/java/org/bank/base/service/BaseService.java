@@ -1,5 +1,6 @@
 package org.bank.base.service;
 
+import jakarta.persistence.metamodel.SingularAttribute;
 import org.bank.base.model.BaseEntity;
 import org.hibernate.Session;
 
@@ -20,4 +21,6 @@ public interface BaseService <ID extends Serializable,T extends BaseEntity<ID>> 
     void updateColumns(T entity, T foundEntity);
 
 
+    Optional<T> findEntityByUniqueField(Class<T> entityClass,
+                                        SingularAttribute<?, ?> field, Object value);
 }

@@ -18,9 +18,17 @@ import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-        String generatedString = RandomStringUtils.random(10,true,true);
-        System.out.println(generatedString);
-
+//        ApplicationContext.getCustomerService().findById(2L)
+        try {
+            ApplicationContext.getCreditCardService().cardToCard(2L,
+                "6219038135923286","6219832412541856",
+                5000L, "281139", "690", LocalDate.of(2030, 3, 4)
+        );
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+//
+//
 //
 //        Customer customer = ApplicationContext.getAccountService().createBankAccount(
 //                new Customer.CustomerDto("mari", "u", "123", "0937"),

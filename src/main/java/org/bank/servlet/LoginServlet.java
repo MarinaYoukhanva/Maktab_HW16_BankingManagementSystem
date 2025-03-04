@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 req.setAttribute("customer", customer);
                 req.setAttribute("message", "logged in successfully");
                 session.setAttribute("customer", customer);
-                req.getRequestDispatcher("/test.jsp").forward(req, resp);
+                req.getRequestDispatcher("/customer-panel.jsp").forward(req, resp);
 
             } else if (userType.equals("employee")) {
                 Employee employee = ApplicationContext

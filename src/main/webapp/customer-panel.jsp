@@ -6,11 +6,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="jakarta.tags.core" %>
+
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<%--<a href="/login?userType=customer">login</a>--%>
+<% if (request.getAttribute("message") != null) { %>
+<p style="color:green;"><%= request.getAttribute("message") %>
+</p>
+<% } %>
+
+<% if (request.getAttribute("error") != null) { %>
+<p style="color:red;"><%= request.getAttribute("error") %>
+</p>
+<% } %>
+
+<a href="/customer/cardToCard">Card-to-Card operation</a>
 </body>
 </html>
