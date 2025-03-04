@@ -16,4 +16,5 @@ public interface BaseRepository <ID extends Serializable,T extends BaseEntity<ID
      int delete(Session session, ID id);
      Long fieldIdCounter(Session session, Class<?> entityClass, SingularAttribute<?, ?> field, Object value);
 
+     Optional<T> findEntityByUniqueField (Session session, Class<T> entityClass, SingularAttribute<?, ?> field, Object value);
 }

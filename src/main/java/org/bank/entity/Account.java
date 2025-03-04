@@ -44,15 +44,15 @@ public class Account extends BaseEntity<Long> {
     @Override
     public String toString() {
         return "Account{" +
-                "id" + getId() +
-                "accountNumber='" + accountNumber + '\'' +
+                "id='" + getId() + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
                 ", accountSheba='" + accountSheba + '\'' +
                 ", balance=" + balance +
                 ", createdAt=" + createdAt +
                 ", accountType=" + accountType +
-                ", owner=" + owner.getId() +
-                ", creditCard=" + creditCard.getId() +
-                ", bankBranch=" + bankBranch +
+                ", owner-id=" + owner.getId() +
+                ", creditCard-id=" + creditCard.getId() +
+                ", bankBranch-id=" + bankBranch.getId() +
                 '}';
     }
 }

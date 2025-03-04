@@ -51,6 +51,15 @@ public abstract class BaseRepositoryImpl<ID extends Serializable, T extends Base
                 .setParameter("value", value)
                 .getSingleResult();
     }
+
+    @Override
+    public Optional<T> findEntityByUniqueField(Session session, Class<T> entityClass, SingularAttribute<?, ?> field, Object value){
+        String query = "FROM " + entityClass.getSimpleName()
+                + " e WHERE e." + field.getName() + " = :value";
+        return session.createQuery(query, entityClass)
+                .setParameter("value", value)
+                .uniqueResultOptional();
+    }
 //    @Override
 //    public Long fieldIdCounter(Session session, Class<?> entityClass, SingularAttribute<?, ?> field, Object value) {
 //        CriteriaBuilder builder = session.getCriteriaBuilder();

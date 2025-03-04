@@ -3,10 +3,7 @@ package org.bank.service.impl;
 import org.bank.base.config.ApplicationContext;
 import org.bank.base.config.SessionFactoryInstance;
 import org.bank.base.service.BaseServiceImpl;
-import org.bank.entity.Account;
-import org.bank.entity.BankBranch;
-import org.bank.entity.CreditCard;
-import org.bank.entity.Customer;
+import org.bank.entity.*;
 import org.bank.entity.dto.CreatedAccountInfoDto;
 import org.bank.exceptions.NotFoundException;
 import org.bank.repository.AccountRepository;
@@ -15,6 +12,7 @@ import org.bank.service.fieldGenerator.RandomGenerator;
 import org.hibernate.Session;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class AccountServiceImpl extends BaseServiceImpl<Long, Account, AccountRepository>
         implements AccountService {
@@ -42,6 +40,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Long, Account, AccountRe
         account.setCreditCard(null);
         return account;
     }
+
 
     @Override
     public CreatedAccountInfoDto createBankAccount(
@@ -85,4 +84,19 @@ public class AccountServiceImpl extends BaseServiceImpl<Long, Account, AccountRe
             }
         }
     }
+
+    @Override
+    public List<Account> viewCustomerAccounts(String customerCode) {
+        try (Session session = SessionFactoryInstance.sessionFactory.openSession()) {
+
+            ApplicationContext.getCustomerRepository().findEntityByUniqueField(
+                            session, Customer.class, Customer_.customerCode, customerCode
+                    )
+                    .orElseThrow(() -> new NotFoundException(Customer.class));
+
+            return getRepository().customerAccounts(session, customerCode);
+        }
+    }
+
+
 }
