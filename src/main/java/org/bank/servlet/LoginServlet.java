@@ -5,6 +5,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.bank.base.config.ApplicationContext;
 import org.bank.entity.Customer;
 import org.bank.entity.Employee;
@@ -25,6 +26,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req,
                           HttpServletResponse resp
     ) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+
         String userType = req.getParameter("userType");
         String username = req.getParameter("username");
         String password = req.getParameter("password");
@@ -34,14 +37,16 @@ public class LoginServlet extends HttpServlet {
                 Customer customer = ApplicationContext
                         .getCustomerService().login(username, password);
                 req.setAttribute("customer", customer);
-                req.getRequestDispatcher("/test.jsp").forward(req, resp);
                 req.setAttribute("message", "logged in successfully");
+                session.setAttribute("customer", customer);
+                req.getRequestDispatcher("/test.jsp").forward(req, resp);
 
             } else if (userType.equals("employee")) {
                 Employee employee = ApplicationContext
                         .getEmployeeService().login(username, password);
                 req.setAttribute("employee", employee);
                 req.setAttribute("message", "logged in successfully");
+                session.setAttribute("employee", employee);
                 req.getRequestDispatcher("/employee-panel.jsp").forward(req, resp);
 
             } else {

@@ -45,8 +45,8 @@
         <option value="JARI">Jari</option>
     </select>
 
-    <label for="bankBranchId">Bank Branch Id:</label>
-    <input type="text" id="bankBranchId" name="bankBranchId" placeholder="Enter bank branch id"/>
+<%--    <label for="bankBranchId">Bank Branch Id:</label>--%>
+<%--    <input type="text" id="bankBranchId" name="bankBranchId" placeholder="Enter bank branch id"/>--%>
 
     <label for="balance">Account Balance:</label>
     <input type="text" id="balance" name="balance" placeholder="Enter balance"/>

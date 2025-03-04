@@ -26,6 +26,7 @@ public record CreatedAccountInfoDto(
         Long balance,
         AccountType accountType,
         LocalDateTime accountCreatedAt,
+        Long bankBranchId,
 
         Long creditCardId,
         String cardNumber,

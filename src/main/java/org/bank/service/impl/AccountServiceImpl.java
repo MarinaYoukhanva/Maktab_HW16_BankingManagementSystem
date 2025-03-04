@@ -75,6 +75,7 @@ public class AccountServiceImpl extends BaseServiceImpl<Long, Account, AccountRe
                         customer.getPhoneNumber(),
                         account.getId(), account.getAccountNumber(), account.getAccountSheba(),
                         account.getBalance(), account.getAccountType(), account.getCreatedAt(),
+                        account.getBankBranch().getId(),
                         creditCard.getId(), creditCard.getCardNumber(), creditCard.getCvv2(),
                         creditCard.getExpiryDate(), creditCard.getFirstPass(), creditCard.getSecondPass()
                 );
