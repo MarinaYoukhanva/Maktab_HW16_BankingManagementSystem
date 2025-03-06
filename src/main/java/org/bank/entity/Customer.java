@@ -104,7 +104,7 @@ public class Customer extends BaseEntity<Long> {
                 ", password='" + password + '\'' +
                 ", customerCode='" + customerCode + '\'' +
                 ", nationalCode='" + nationalCode + '\'' +
-                ", accounts=" + accounts +
+                ", accounts=" + accounts.stream().map(BaseEntity::getId) +
                 '}';
     }
 }

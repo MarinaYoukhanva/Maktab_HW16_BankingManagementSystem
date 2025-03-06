@@ -13,14 +13,14 @@ import org.bank.entity.Employee;
 import java.io.IOException;
 import java.time.LocalDate;
 
-@WebServlet("customer/cardToCard")
+@WebServlet("/customer/cardToCard")
 public class CardToCardServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req,
                          HttpServletResponse resp
     ) throws ServletException, IOException {
-        req.getRequestDispatcher("/create-new-account.jsp").forward(req, resp);
+        req.getRequestDispatcher("/card-to-card.jsp").forward(req, resp);
     }
 
     @Override

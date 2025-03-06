@@ -5,6 +5,7 @@ import org.bank.entity.CreditCard;
 import org.hibernate.Session;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public interface CreditCardService extends BaseService<Long, CreditCard> {
     CreditCard create(Session session);
@@ -12,4 +13,6 @@ public interface CreditCardService extends BaseService<Long, CreditCard> {
     void cardToCard(Long customerId, String sourceCardNumber,
                     String destinationCardNumber, Long amount,
                     String secondPass, String cvv2, LocalDate expiryDate);
+
+    List<String> findCustomerCards (Long customerId);
 }

@@ -19,6 +19,11 @@ import java.time.LocalDateTime;
 
 public class Main {
     public static void main(String[] args) {
+
+//        ApplicationContext.getCustomerService()
+//                .changeSecondPassword(2L,"6219821163410401","000000","000001");
+
+//        System.out.println(ApplicationContext.getCustomerService().findById(2L));
 //        ApplicationContext.getCustomerService().findById(2L)
 //        try {
 //            ApplicationContext.getCreditCardService().cardToCard(2L,
@@ -48,6 +53,9 @@ public class Main {
 //        Customer customer = customerService.findById(1L).get();
 //
 //        try(Session session = SessionFactoryInstance.sessionFactory.openSession()){
+//            ApplicationContext.getCreditCardRepository().findCustomerCards(session,1L)
+//                    .forEach(System.out::println);
+//        }
 //            String a = RandomGenerator.generateAccountNumber(session);
 //            System.out.println(a);
 
@@ -59,14 +67,14 @@ public class Main {
 //            ApplicationContext.getAccountRepository().customerAccounts(session,"111")
 //                    .forEach(System.out::println);
 //
-            try {
-                ApplicationContext.getCreditCardService().singleEntitySave(
-                        new CreditCard("12345678", "666",
-                                LocalDateTime.now(),
-                        "5511", "2222", null));
-            }catch (Exception e){
-                System.out.println(e.getMessage());
-            }
+//            try {
+//                ApplicationContext.getCreditCardService().singleEntitySave(
+//                        new CreditCard("6219038135923286", "666",
+//                                LocalDateTime.now(),
+//                        "5511", "223322", null));
+//            }catch (Exception e){
+//                System.out.println(e.getMessage());
+//            }
 
 //            Long count = creditCardRepository.fieldIdCounter(
 //                    session,

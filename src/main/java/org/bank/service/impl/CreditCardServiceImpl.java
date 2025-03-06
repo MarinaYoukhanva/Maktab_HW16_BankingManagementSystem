@@ -17,6 +17,7 @@ import org.bank.validations.UniquenessValidator;
 import org.hibernate.Session;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class CreditCardServiceImpl extends BaseServiceImpl<Long, CreditCard, CreditCardRepository>
         implements CreditCardService, UniqueFieldCheckable<CreditCard> {
@@ -94,6 +95,13 @@ public class CreditCardServiceImpl extends BaseServiceImpl<Long, CreditCard, Cre
                 session.getTransaction().rollback();
                 throw e;
             }
+        }
+    }
+
+    @Override
+    public List<String> findCustomerCards(Long customerId) {
+        try(Session session = SessionFactoryInstance.sessionFactory.openSession()){
+            return getRepository().findCustomerCards(session, customerId);
         }
     }
 }

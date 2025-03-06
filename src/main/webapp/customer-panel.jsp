@@ -24,6 +24,6 @@
 <% } %>
 
 <a href="/customer/cardToCard">Card-to-Card operation</a>
-<a>Change Password</a>
+<a href="/customer/changePass">Change Password</a>
 </body>
 </html>
